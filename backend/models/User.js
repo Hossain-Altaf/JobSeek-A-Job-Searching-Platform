@@ -12,7 +12,34 @@ const userSchema = new mongoose.Schema(
     companyName: { type: String, default: "" },
     companyLogo: { type: String, default: "" },
     profilePic: { type: String, default: "" },
-    isBlocked: { type: Boolean, default: false },
+    isBlocked: {
+      type: Boolean,
+      default: false, // admin can block users
+    },
+    followers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    savedJobs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Job",
+      },
+    ],
+    savedPosts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
   },
   { timestamps: true }
 );

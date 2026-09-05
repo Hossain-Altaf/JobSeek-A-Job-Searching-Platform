@@ -55,14 +55,28 @@ const JobDetails = () => {
     }
   };
 
+  const handleSaveJob = async () => {
+  try {
+    await API.put(`/saved/job/${id}`);
+    setApplyMessage("Job saved!");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
   if (loading) return <p className="home-container">Loading...</p>;
   if (!job) return <p className="home-container">Job not found.</p>;
 
   return (
     <div className="home-container">
       <div className="job-detail-card">
-        <h1>{job.title}</h1>
-        <p className="job-company">{job.company}</p>
+  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+    <h1>{job.title}</h1>
+    <button className="save-job-btn" onClick={handleSaveJob}>
+      🔖 Save
+    </button>
+  </div>
+  <p className="job-company">{job.company}</p>
         <p className="job-meta">
           {job.location} · {job.jobType}
         </p>

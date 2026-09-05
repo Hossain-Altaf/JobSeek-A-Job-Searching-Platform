@@ -36,6 +36,15 @@ const Home = () => {
     fetchJobs();
   };
 
+  const handleSaveJob = async (jobId) => {
+  try {
+    await API.put(`/saved/job/${jobId}`);
+    alert("Job saved!");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
   return (
     <div className="home-container">
       <h1>Find Your Next Job</h1>
@@ -71,19 +80,30 @@ const Home = () => {
       ) : (
         <div className="job-list">
           {jobs.map((job) => (
-            <Link to={`/jobs/${job._id}`} key={job._id} className="job-card">
-              <h3>{job.title}</h3>
-              <p className="job-company">{job.company}</p>
-              <p className="job-meta">
-                {job.location} · {job.jobType}
-              </p>
-              {job.salaryMin && job.salaryMax && (
-                <p className="job-salary">
-                  ${job.salaryMin} - ${job.salaryMax}
-                </p>
-              )}
-            </Link>
-          ))}
+  <div key={job._id} className="job-card">
+    <Link to={`/jobs/${job._id}`} style={{ textDecoration: "none", color: "inherit" }}>
+      <h3>{job.title}</h3>
+      <p className="job-company">{job.company}</p>
+      <p className="job-meta">
+        {job.location} · {job.jobType}
+      </p>
+      {job.salaryMin && job.salaryMax && (
+        <p className="job-salary">
+          ${job.salaryMin} - ${job.salaryMax}
+        </p>
+      )}
+    </Link>
+    <button
+      className="save-job-btn"
+      onClick={(e) => {
+        e.preventDefault();
+        handleSaveJob(job._id);
+      }}
+    >
+      🔖 Save
+    </button>
+  </div>
+))}
         </div>
       )}
     </div>

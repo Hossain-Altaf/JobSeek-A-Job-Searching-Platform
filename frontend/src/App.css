@@ -615,3 +615,15 @@
   border-radius: 20px;
   cursor: pointer;
 }
+
+.save-job-btn {
+  background: var(--bg-tag);
+  color: var(--text-main);
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-top: 0.6rem;
+  align-self: flex-start;
+}

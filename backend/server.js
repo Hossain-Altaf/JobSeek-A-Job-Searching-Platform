@@ -11,8 +11,8 @@ const app = express();
 // Middleware
 const allowedOrigins = [
   "http://localhost:5173",
-  process.env.CLIENT_URL, // on Render , Vercel URL
-];
+  process.env.CLIENT_URL,
+].filter(Boolean); // removes undefined if CLIENT_URL isn't set
 
 app.use(
   cors({
@@ -20,7 +20,8 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        console.log("Blocked CORS request from origin:", origin);
+        callback(null, false); // reject cleanly, no 500 crash
       }
     },
     credentials: true,

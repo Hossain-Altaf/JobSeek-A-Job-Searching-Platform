@@ -87,7 +87,7 @@ A full-stack job portal built with the MERN stack, combining traditional job sea
 |---|---|
 | ![Messages](./screenshots/message.png) | ![Notifications](./screenshots/notification.png) |
 
-| Search|
+| Search job | Search people|
 |---|---|
 | ![Search-job](./screenshots/search.png) | ![Search-people](./screenshots/search2.png) |
 
